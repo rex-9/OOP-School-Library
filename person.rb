@@ -36,7 +36,7 @@ class Person < Nameable
     ObjectSpace.each_object(self).count
   end
 
-  def add_rental(date, self, book)
+  def add_rental(date, book)
     Rental.new(date, self, book)
   end
 end
