@@ -1,8 +1,11 @@
 require './nameable'
 
-class BaseDecorator
-  def initialize
-    @nameable = Nameable.new
+class BaseDecorator < Nameable
+  attr_accessor :nameable
+
+  def initialize(nameable)
+    @nameable = nameable
+    super()
   end
 
   def correct_name
