@@ -1,4 +1,5 @@
 require './nameable'
+require './rental'
 
 class Person < Nameable
   attr_accessor :age, :name
@@ -25,5 +26,17 @@ class Person < Nameable
 
   def correct_name
     @name
+  end
+
+  def self.all
+    ObjectSpace.each_object(self).all
+  end
+
+  def self.count
+    ObjectSpace.each_object(self).count
+  end
+
+  def add_rental(date, self, book)
+    Rental.new(date, self, book)
   end
 end
