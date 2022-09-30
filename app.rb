@@ -13,26 +13,27 @@ class App
     Person.all.map { |person| puts "ID: #{person.id}, Name: #{person.name}, Age: #{person.age}" }
   end
 
-  def self.createClassroom(label)
+  def self.create_classroom(label)
     Classroom.new(label)
   end
 
-  def self.createPerson
+  def self.create_person
     print 'Do you want to create a student ( 1 ) or a teacher ( 2 ) ? [ Input the number ] :'
-    personType = gets.chomp.to_i
-    if personType == 1
-      print "Classroom: "
+    person_type = gets.chomp.to_i
+    case person_type
+    when 1
+      print 'Classroom: '
       label = gets.chomp
       classroom = App.createClassroom(label)
-      print "Age: "
+      print 'Age: '
       age = gets.chomp.to_i
-      print "Name: "
+      print 'Name: '
       name = gets.chomp
-      print "Has parent permission [Y/N]: "
+      print 'Has parent permission [Y/N]: '
       yn = gets.chomp
-      Student.new(age, classroom, name, parent_permission: true) if yn == 'Y' || yn == 'y'
-      Student.new(age, classroom, name, parent_permission: false) if yn == 'N' || yn == 'n'
-    elsif personType == 2
+      Student.new(age, classroom, name, parent_permission: true) if %w[Y y].include?(yn)
+      Student.new(age, classroom, name, parent_permission: false) if %w[N n].include?(yn)
+    when 2
       print 'Age: '
       age = gets.chomp.to_i
       print 'Name: '
@@ -47,7 +48,7 @@ class App
     puts 'Person created successfully'
   end
 
-  def self.createBook
+  def self.create_book
     print 'Title: '
     title = gets.chomp
     print 'Author: '
@@ -56,24 +57,24 @@ class App
     puts 'Book created successfully'
   end
 
-  def self.createRental
+  def self.create_rental
     puts 'Select a book from the following list by number'
-    #list book with index
+    # list book with index
     Book.all.map.with_index { |book, index| puts "#{index + 1}, Title: #{book.title}, Author: #{book.author}" }
-    bookIndex = gets.chomp.to_i
-    book = Book.all[bookIndex - 1]
+    book_index = gets.chomp.to_i
+    book = Book.all[book_index - 1]
     puts 'Select a person from the following list by number ( not id )'
-    #list person with index
+    # list person with index
     Person.all.map.with_index { |person, index| puts "#{index + 1}, Name: #{person.name}, Age: #{person.age}" }
-    personIndex = gets.chomp.to_i
-    person = Person.all[personIndex - 1]
+    person_index = gets.chomp.to_i
+    person = Person.all[person_index - 1]
     print 'Date: '
     date = gets.chomp
     Rental.new(date, person, book)
     puts 'Rental created successfully'
   end
 
-  def self.rentalsOfAPerson
+  def self.rentals_of_a_person
     print 'ID of person:'
     id = gets.chomp.to_i
     person = Person.all.select { |x| x.id == id }[0]
@@ -83,9 +84,9 @@ class App
     else
       puts 'Person with the given ID does not exist.'
       puts 'Here are the available persons...'
-      self.persons
+      persons
       puts 'Please try again!'
-      self.rentalsOfAPerson
+      rentalsOfAPerson
     end
   end
 end

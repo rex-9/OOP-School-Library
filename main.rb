@@ -1,4 +1,5 @@
-require './app.rb'
+require './app'
+# rubocop:disable Metrics
 
 def initiate
   options = 'Please choose an option by enterin a number :
@@ -10,8 +11,8 @@ def initiate
   6 - List all rentals for a given person id
   7 - Exit'
   puts options
-  selectedOption = gets.chomp.to_i
-  execute(selectedOption)
+  selected_option = gets.chomp.to_i
+  execute(selected_option)
 end
 
 def execute(option)
@@ -26,20 +27,19 @@ def execute(option)
     initiate
 
   when 3
-    App.createPerson
+    App.create_person
     initiate
 
   when 4
-    App.createBook
+    App.create_book
     initiate
 
-
   when 5
-    App.createRental
+    App.create_rental
     initiate
 
   when 6
-    App.rentalsOfAPerson
+    App.rentals_of_a_person
     initiate
 
   when 7
@@ -50,6 +50,7 @@ def execute(option)
     initiate
   end
 end
+# rubocop:enable Metrics
 
 puts 'Welcome to School Library App'
 initiate
