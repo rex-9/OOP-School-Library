@@ -7,8 +7,8 @@ class Person < Nameable
 
   def initialize(age, name = 'Unknown', parent_permission: true)
     @id = Random.rand(1..10_000)
-    @name = name
     @age = age
+    @name = name
     @parent_permission = parent_permission
     @rentals = []
     super()
@@ -29,7 +29,7 @@ class Person < Nameable
   end
 
   def self.all
-    ObjectSpace.each_object(self).all
+    ObjectSpace.each_object(self).to_a
   end
 
   def self.count
