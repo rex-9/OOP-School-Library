@@ -1,4 +1,4 @@
-require './app'
+require_relative './app'
 # rubocop:disable Metrics
 
 def initiate

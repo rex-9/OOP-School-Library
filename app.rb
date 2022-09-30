@@ -1,8 +1,8 @@
-require './classroom'
-require './book'
-require './person'
-require './student'
-require './teacher'
+require_relative './classroom'
+require_relative './book'
+require_relative './person'
+require_relative './student'
+require_relative './teacher'
 
 class App
   def self.books
@@ -22,17 +22,14 @@ class App
     person_type = gets.chomp.to_i
     case person_type
     when 1
-      print 'Classroom: '
-      label = gets.chomp
-      classroom = App.createClassroom(label)
       print 'Age: '
       age = gets.chomp.to_i
       print 'Name: '
       name = gets.chomp
       print 'Has parent permission [Y/N]: '
       yn = gets.chomp
-      Student.new(age, classroom, name, parent_permission: true) if %w[Y y].include?(yn)
-      Student.new(age, classroom, name, parent_permission: false) if %w[N n].include?(yn)
+      Student.new(age, name, parent_permission: true) if %w[Y y].include?(yn)
+      Student.new(age, name, parent_permission: false) if %w[N n].include?(yn)
     when 2
       print 'Age: '
       age = gets.chomp.to_i
