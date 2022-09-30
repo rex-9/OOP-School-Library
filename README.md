@@ -22,6 +22,10 @@ To get a local copy up and running:
 
 **`code .`**
 
+4. Run our beautiful Library application:
+
+**`ruby main.rb`**
+
 ## Rex
 
 👤 - Github: [@rex-9](https://github.com/rex-9/)<br>
