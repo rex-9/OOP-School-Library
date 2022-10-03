@@ -28,8 +28,8 @@ class App
       name = gets.chomp
       print 'Has parent permission [Y/N]: '
       yn = gets.chomp
-      Student.new(name, age, parent_permission: true) if %w[Y y].include?(yn)
-      Student.new(name, age, parent_permission: false) if %w[N n].include?(yn)
+      Student.new(age, name, parent_permission: true) if %w[Y y].include?(yn)
+      Student.new(age, name, parent_permission: false) if %w[N n].include?(yn)
     when 2
       print 'Age: '
       age = gets.chomp.to_i
