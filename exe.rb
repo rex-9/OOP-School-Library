@@ -1,5 +1,6 @@
-class Exe
+# rubocop:disable Metrics
 
+class Exe
   def initialize(option)
     @option = option
   end
@@ -40,3 +41,4 @@ class Exe
     end
   end
 end
+# rubocop:enable Metrics

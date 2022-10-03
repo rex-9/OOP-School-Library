@@ -1,6 +1,5 @@
 require_relative './app'
 require_relative './exe'
-# rubocop:disable Metrics
 
 class Main
   def initiate
@@ -17,8 +16,6 @@ class Main
     Exe.new(selected_option).execute
   end
 end
-
-# rubocop:enable Metrics
 
 puts 'Welcome to School Library App'
 Main.new.initiate
