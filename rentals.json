@@ -1,0 +1,14 @@
+[
+  {
+    "date": "2019-01-01",
+    "person": {
+      "id": 1,
+      "age": 21,
+      "name": "John"
+    },
+    "book": {
+      "title": "Elden Ring",
+      "author": "Miyazaki"
+    }
+  }
+]

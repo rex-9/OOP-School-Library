@@ -1,0 +1,26 @@
+[{
+  "id": 1,
+  "age": 21,
+  "name": "John",
+  "rentals": [
+    {
+      "date": "2017-12-08",
+      "book": {
+        "title": "Elden Ring",
+        "author": "Miyazaki"
+      }
+    }
+  ]}, {
+  "id": 2,
+  "age": 23,
+  "name": "Red",
+  "rentals": [
+    {
+      "date": "2017-12-08",
+      "book": {
+        "title": "Elden Ring",
+        "author": "Miyazaki"
+      }
+    }
+  ]
+}]

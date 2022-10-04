@@ -1,5 +1,6 @@
 require_relative './nameable'
 require_relative './rental'
+require 'json'
 
 class Person < Nameable
   attr_accessor :age, :name
@@ -29,7 +30,7 @@ class Person < Nameable
   end
 
   def self.all
-    ObjectSpace.each_object(self).to_a
+    JSON.parse(File.read('./people.json'))
   end
 
   def self.count

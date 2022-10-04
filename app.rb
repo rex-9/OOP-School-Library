@@ -6,11 +6,11 @@ require_relative './teacher'
 
 class App
   def self.books
-    Book.all.map { |book| puts "Title: #{book.title}, Author: #{book.author}" }
+    Book.all.map { |book| puts "Title: #{book['title']}, Author: #{book['author']}" }
   end
 
   def self.persons
-    Person.all.map { |person| puts "ID: #{person.id}, Name: #{person.name}, Age: #{person.age}" }
+    Person.all.map { |person| puts "ID: #{person['id']}, Name: #{person['name']}, Age: #{person['age']}" }
   end
 
   def self.create_classroom(label)
@@ -72,18 +72,18 @@ class App
   end
 
   def self.rentals_of_a_person
-    print 'ID of person:'
+    print "\nID of person:"
     id = gets.chomp.to_i
-    person = Person.all.select { |x| x.id == id }[0]
+    person = Person.all.select { |x| x['id'] == id }[0]
     if person
       puts 'Rentals'
-      person.rentals.each { |rental| puts "Date: #{rental.date}, Book: #{rental.book.title}" }
+      person['rentals'].each { |rental| puts "Date: #{rental['date']}, Book: #{rental['book']['title']}" }
     else
       puts 'Person with the given ID does not exist.'
       puts 'Here are the available persons...'
       persons
       puts 'Please try again!'
-      rentalsOfAPerson
+      rentals_of_a_person
     end
   end
 end
