@@ -15,7 +15,7 @@ class Book
   end
 
   def self.all
-    JSON.parse(File.read('./books.json'))
+    ObjectSpace.each_object(self).to_a
   end
 
   def destroy

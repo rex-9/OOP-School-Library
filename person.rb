@@ -1,13 +1,12 @@
 require_relative './nameable'
 require_relative './rental'
-require 'json'
 
 class Person < Nameable
   attr_accessor :age, :name
   attr_reader :id, :rentals
 
-  def initialize(age, name = 'Unknown', parent_permission: true)
-    @id = Random.rand(1..10_000)
+  def initialize(age, id = Random.rand(1..10_000), name = 'Unknown', parent_permission: true)
+    @id = id
     @age = age
     @name = name
     @parent_permission = parent_permission
@@ -30,7 +29,7 @@ class Person < Nameable
   end
 
   def self.all
-    JSON.parse(File.read('./people.json'))
+    ObjectSpace.each_object(self).to_a
   end
 
   def self.count

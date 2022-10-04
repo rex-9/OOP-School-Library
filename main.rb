@@ -1,8 +1,17 @@
+require_relative './book'
+require_relative './person'
 require_relative './app'
 require_relative './exe'
 
 class Main
-  def initiate
+  def self.load_data
+    books = File.read('./books.json') if File.exist?('./books.json')
+    JSON.parse(books).map { |book| Book.new(book['title'], book['author']) }
+    people = File.read('./people.json') if File.exist?('./people.json')
+    JSON.parse(people).map { |person| Person.new(person['age'], person['id'], person['name']) }
+  end
+
+  def self.initiate
     options = "\nPlease choose an option by enterin a number :
     1 - List all books
     2 - List all people
@@ -10,7 +19,8 @@ class Main
     4 - Create a book
     5 - Create a rental
     6 - List all rentals for a given person id
-    7 - Exit"
+    7 - Save and Exit"
+
     puts options
     selected_option = gets.chomp.to_i
     Exe.new(selected_option).execute
@@ -18,4 +28,5 @@ class Main
 end
 
 puts 'Welcome to School Library App'
-Main.new.initiate
+Main.load_data
+Main.initiate
