@@ -10,34 +10,35 @@ class Exe
 
     when 1
       puts App.books
-      Main.new.initiate
+      Main.initiate
 
     when 2
       puts App.persons
-      Main.new.initiate
+      Main.initiate
 
     when 3
       App.create_person
-      Main.new.initiate
+      Main.initiate
 
     when 4
       App.create_book
-      Main.new.initiate
+      Main.initiate
 
     when 5
       App.create_rental
-      Main.new.initiate
+      Main.initiate
 
     when 6
       App.rentals_of_a_person
-      Main.new.initiate
+      Main.initiate
 
     when 7
+      App.save
       abort 'See you later! Give us a visit whenever you need something from us'
 
     else
       puts 'Please enter a valid option'
-      Main.new.initiate
+      Main.initiate
     end
   end
 end

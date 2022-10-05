@@ -3,6 +3,7 @@ require_relative './book'
 require_relative './person'
 require_relative './student'
 require_relative './teacher'
+require 'json'
 
 class App
   def self.books
@@ -18,7 +19,7 @@ class App
   end
 
   def self.create_person
-    print 'Do you want to create a student ( 1 ) or a teacher ( 2 ) ? [ Input the number ] :'
+    print 'Do you want to create a student (1) or a teacher (2) ? [Input the number] :'
     person_type = gets.chomp.to_i
     case person_type
     when 1
@@ -35,9 +36,7 @@ class App
       age = gets.chomp.to_i
       print 'Name: '
       name = gets.chomp
-      print 'Specialization: '
-      specialization = gets.chomp
-      Teacher.new(age, specialization, name)
+      Teacher.new(age, name)
     else
       puts 'Please enter a valid number'
       execute(3)
@@ -72,18 +71,36 @@ class App
   end
 
   def self.rentals_of_a_person
-    print 'ID of person:'
+    print "\nID of person:"
     id = gets.chomp.to_i
     person = Person.all.select { |x| x.id == id }[0]
     if person
       puts 'Rentals'
-      person.rentals.each { |rental| puts "Date: #{rental.date}, Book: #{rental.book.title}" }
+      rentals = Rental.all.select { |rental| rental.person["id"] == person.id }
+      rentals.map { |rental| puts "Date: #{rental.date}, Book: #{rental.book["title"]}" }
     else
       puts 'Person with the given ID does not exist.'
       puts 'Here are the available persons...'
       persons
       puts 'Please try again!'
-      rentalsOfAPerson
+      rentals_of_a_person
     end
+  end
+
+  def self.save
+    puts books = Book.all.map { |book| { title: book.title, author: book.author } }.to_a.to_json
+    puts rentals = Rental.all.map { |rental| { date: rental.date, person: { id: rental.person.id, age: rental.person.age, name: rental.person.name, }, book: { title: rental.book.title, author: rental.book.author } } }.to_a.to_json
+    # puts rentals = Person.all.map do |person|
+    #   person.rentals.map { |rental| { person_id: person.id, date: rental.date, book: { title: rental.book.title, author: rental.book.author } }}.to_a.to_json
+    # end
+    # rentals.map { |rental| rentals = rental if rental.count == 0 }
+    puts people = Person.all.map { |person| { id: person.id, age: person.age, name: person.name, rentals: [] }}.to_a.to_json
+    saved_books = File.open('books.json', 'w')
+    saved_people = File.open('people.json', 'w')
+    saved_rentals = File.open('rentals.json', 'w')
+    saved_books.write(books)
+    saved_people.write(people)
+    saved_rentals.write(rentals)
+    puts 'Saved successfully'
   end
 end
