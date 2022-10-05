@@ -12,11 +12,11 @@ To get a local copy up and running:
 
 1. Clone this repository or download the zip folder:
 
-**`git clone https://github.com/HtetNaing0814/Xrocket.git`**
+**`git clone https://github.com/rex-9/OOP-School-Library.git`**
 
 2. Navigate to the location of the folder in your machine:
 
-**`you@your-Pc-name:~$ cd Xrocket`**
+**`you@your-Pc-name:~$ cd OOP-School-Library`**
 
 3. Open the project with VScode:
 

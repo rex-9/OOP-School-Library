@@ -9,6 +9,8 @@ class Main
     JSON.parse(books).map { |book| Book.new(book['title'], book['author']) }
     people = File.read('./people.json') if File.exist?('./people.json')
     JSON.parse(people).map { |person| Person.new(person['age'], person['id'], person['name']) }
+    rentals = File.read('./rentals.json') if File.exist?('./rentals.json')
+    JSON.parse(rentals).map { |rental| Rental.new(rental['date'], rental['person'], rental['book']) }
   end
 
   def self.initiate
