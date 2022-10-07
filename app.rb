@@ -76,8 +76,8 @@ class App
     person = Person.all.select { |x| x.id == id }[0]
     if person
       puts 'Rentals'
-      rentals = Rental.all.select { |rental| rental.person["id"] == person.id }
-      rentals.map { |rental| puts "Date: #{rental.date}, Book: #{rental.book["title"]}" }
+      rentals = Rental.all.select { |rental| rental.person['id'] == person.id }
+      rentals.map { |rental| puts "Date: #{rental.date}, Book: #{rental.book['title']}" }
     else
       puts 'Person with the given ID does not exist.'
       puts 'Here are the available persons...'
@@ -89,12 +89,17 @@ class App
 
   def self.save
     puts books = Book.all.map { |book| { title: book.title, author: book.author } }.to_a.to_json
-    puts rentals = Rental.all.map { |rental| { date: rental.date, person: { id: rental.person.id, age: rental.person.age, name: rental.person.name, }, book: { title: rental.book.title, author: rental.book.author } } }.to_a.to_json
+    puts rentals = Rental.all.map do |rental|
+      { date: rental.date, person: { id: rental.person.id, age: rental.person.age, name: rental.person.name },
+        book: { title: rental.book.title, author: rental.book.author } }
+    end.to_a.to_json
     # puts rentals = Person.all.map do |person|
     #   person.rentals.map { |rental| { person_id: person.id, date: rental.date, book: { title: rental.book.title, author: rental.book.author } }}.to_a.to_json
     # end
     # rentals.map { |rental| rentals = rental if rental.count == 0 }
-    puts people = Person.all.map { |person| { id: person.id, age: person.age, name: person.name, rentals: [] }}.to_a.to_json
+    puts people = Person.all.map do |person|
+      { id: person.id, age: person.age, name: person.name, rentals: [] }
+    end.to_a.to_json
     saved_books = File.open('books.json', 'w')
     saved_people = File.open('people.json', 'w')
     saved_rentals = File.open('rentals.json', 'w')
