@@ -7,7 +7,7 @@ require 'json'
 
 class App
   def self.books
-    Book.all.map { |book| puts "Title: #{book.title}, Author: #{book.author}" }
+    Book.all.map { |book| puts "ID: #{book.id} Title: #{book.title}, Author: #{book.author}" }
   end
 
   def self.persons
@@ -88,18 +88,18 @@ class App
   end
 
   def self.save
-    puts books = Book.all.map { |book| { title: book.title, author: book.author } }.to_a.to_json
-    puts rentals = Rental.all.map do |rental|
+    puts books = Book.all.map { |book| { id: book.id, title: book.title, author: book.author } }.to_a.to_json
+    puts rentals = Rental.all.map { |rental|
       { date: rental.date, person: { id: rental.person.id, age: rental.person.age, name: rental.person.name },
         book: { title: rental.book.title, author: rental.book.author } }
-    end.to_a.to_json
+    }.to_a.to_json
     # puts rentals = Person.all.map do |person|
     #   person.rentals.map { |rental| { person_id: person.id, date: rental.date, book: { title: rental.book.title, author: rental.book.author } }}.to_a.to_json
     # end
     # rentals.map { |rental| rentals = rental if rental.count == 0 }
-    puts people = Person.all.map do |person|
+    puts people = Person.all.map { |person|
       { id: person.id, age: person.age, name: person.name, rentals: [] }
-    end.to_a.to_json
+    }.to_a.to_json
     saved_books = File.open('books.json', 'w')
     saved_people = File.open('people.json', 'w')
     saved_rentals = File.open('rentals.json', 'w')

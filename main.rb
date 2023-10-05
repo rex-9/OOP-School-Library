@@ -6,11 +6,11 @@ require_relative './exe'
 class Main
   def self.load_data
     books = File.read('./books.json') if File.exist?('./books.json')
-    JSON.parse(books).map { |book| Book.new(book['title'], book['author']) }
+    JSON.parse(books).map { |book| Book.new(book['title'], book['author'], book['id']) } if books
     people = File.read('./people.json') if File.exist?('./people.json')
-    JSON.parse(people).map { |person| Person.new(person['age'], person['id'], person['name']) }
+    JSON.parse(people).map { |person| Person.new(person['age'], person['name'], person['id']) } if people
     rentals = File.read('./rentals.json') if File.exist?('./rentals.json')
-    JSON.parse(rentals).map { |rental| Rental.new(rental['date'], rental['person'], rental['book']) }
+    JSON.parse(rentals).map { |rental| Rental.new(rental['date'], Person.all.find { |person| person.id === rental['person']['id'] }, Book.all.find { |book| book.id === rental['book']['id'] },) } if rentals
   end
 
   def self.initiate
