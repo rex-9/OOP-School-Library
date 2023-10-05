@@ -76,8 +76,8 @@ class App
     person = Person.all.select { |x| x.id == id }[0]
     if person
       puts 'Rentals'
-      rentals = Rental.all.select { |rental| rental.person['id'] == person.id }
-      rentals.map { |rental| puts "Date: #{rental.date}, Book: #{rental.book['title']}" }
+      rentals = person.rentals
+      rentals.map { |rental| puts "Date: #{rental.date}, Book: #{rental.book.title}" }
     else
       puts 'Person with the given ID does not exist.'
       puts 'Here are the available persons...'
@@ -88,10 +88,12 @@ class App
   end
 
   def self.save
-    puts books = Book.all.map { |book| { id: book.id, title: book.title, author: book.author } }.to_a.to_json
+    puts books = Book.all.map { |book| { id: book.id, title: book.title, author: book.author, rentals: [] } }.to_a.to_json
     puts rentals = Rental.all.map { |rental|
-      { date: rental.date, person: { id: rental.person.id, age: rental.person.age, name: rental.person.name },
-        book: { title: rental.book.title, author: rental.book.author } }
+      { date: rental.date, 
+        person: { id: rental.person.id, age: rental.person.age, name: rental.person.name },
+        book: { id: rental.book.id, title: rental.book.title, author: rental.book.author }
+      }
     }.to_a.to_json
     # puts rentals = Person.all.map do |person|
     #   person.rentals.map { |rental| { person_id: person.id, date: rental.date, book: { title: rental.book.title, author: rental.book.author } }}.to_a.to_json

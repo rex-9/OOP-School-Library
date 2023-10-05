@@ -10,7 +10,13 @@ class Main
     people = File.read('./people.json') if File.exist?('./people.json')
     JSON.parse(people).map { |person| Person.new(person['age'], person['name'], person['id']) } if people
     rentals = File.read('./rentals.json') if File.exist?('./rentals.json')
-    JSON.parse(rentals).map { |rental| Rental.new(rental['date'], Person.all.find { |person| person.id === rental['person']['id'] }, Book.all.find { |book| book.id === rental['book']['id'] },) } if rentals
+    JSON.parse(rentals).map { |rental| 
+      Rental.new(
+        rental['date'], 
+        Person.all.find { |person| person.id === rental['person']['id'] }, 
+        Book.all.find { |book| book.id === rental['book']['id'] },
+      ) 
+    } if rentals
   end
 
   def self.initiate
